@@ -8,6 +8,8 @@ from google.oauth2.service_account import Credentials
 # 앱 제목 출력
 st.title("3️⃣ 🔒 비공개 Google Sheet 연결")
 
+st.write("secrets keys:", list(st.secrets.keys()))
+
 # 서비스 계정 설정 안내
 st.info(
     "🔐 시트에 ‘공개 설정 없이’ 안전하게 접근하려면 서비스 계정을 사용해야 합니다.\n"
@@ -30,7 +32,7 @@ credentials = Credentials.from_service_account_info(
 gc = gspread.authorize(credentials)
 
 # secrets.toml에 저장된 시트 키로 구글 시트 열기
-spreadsheet = gc.open_by_key(st.secrets["gsheet_key"])
+spreadsheet = gc.open_by_key(st.secrets["pw"]["gsheet_key"])
 
 # "datainput" 워크시트 선택
 sheet_input = spreadsheet.worksheet("시트1")
